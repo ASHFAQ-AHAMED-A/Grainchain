@@ -17,8 +17,8 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 240 5.9% 10%; /* Darker primary for stronger presence */
+    --primary-foreground: 0 0% 98%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -26,7 +26,7 @@ All colors MUST be HSL.
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 210 40% 96.1%; /* Keeping accent subtle */
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -38,19 +38,18 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 240 5.9% 10%; /* Dark sidebar background */
+    --sidebar-foreground: 0 0% 98%; /* Light text for dark sidebar */
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 224.3 76.3% 48%; /* Vibrant primary for sidebar active items */
 
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 100%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 3.7% 15.9%; /* Slightly lighter accent for sidebar hover */
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 240 3.7% 15.9%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
@@ -103,3 +102,33 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom styles for layout issues */
+.black-container {
+  padding: 1.5rem; /* Increased padding for content */
+}
+
+.sidebar {
+  padding: 1rem; /* Padding for the sidebar itself */
+  overflow: auto; /* Ensure sidebar content is scrollable */
+}
+
+.sidebar .item {
+  display: block;
+  padding: 0.75rem 1rem; /* Increased padding for sidebar items */
+  margin-bottom: 0.5rem; /* Spacing between sidebar items */
+}
+
+.sidebar a,
+.sidebar button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem; /* Consistent padding for clickable elements */
+  box-sizing: border-box;
+}
+
+.main-content {
+  overflow: auto; /* Ensure main content is scrollable */
+}
+
+

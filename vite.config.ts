@@ -8,6 +8,10 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    hmr: {
+      host: "8080-i7zgyolgpqs9fmixl0fyx-6394ccc7.manusvm.computer",
+      protocol: "wss",
+    },
   },
   plugins: [
     react(),
@@ -20,3 +24,4 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
+
