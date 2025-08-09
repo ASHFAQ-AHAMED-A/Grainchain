@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GrainChain PDS Design System - Blockchain & Agriculture Themed */
+
+@layer base {
+  :root {
+    /* Core Background & Foreground */
+    --background: 0 0% 99%;
+    --foreground: 215 25% 15%;
+
+    /* Card & Surface Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    /* Brand Colors - Blockchain Teal & Agriculture Green */
+    --primary: 184 91% 17%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 184 91% 35%;
+    
+    --secondary: 142 76% 36%;
+    --secondary-foreground: 0 0% 98%;
+    --secondary-glow: 142 76% 55%;
+
+    /* Accent - Warm Amber for Actions */
+    --accent: 43 96% 56%;
+    --accent-foreground: 215 25% 15%;
+    --accent-glow: 43 96% 70%;
+
+    /* Muted Tones */
+    --muted: 220 13% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    /* System Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    
+    --warning: 43 96% 56%;
+    --warning-foreground: 215 25% 15%;
+
+    /* Interactive Elements */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 184 91% 17%;
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(184 91% 17%), hsl(184 91% 35%));
+    --gradient-secondary: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 55%));
+    --gradient-hero: linear-gradient(135deg, hsl(184 91% 17%), hsl(142 76% 36%));
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 13% 98%));
+
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(184 91% 35% / 0.3);
+    --shadow-card: 0 4px 6px -1px hsl(220 13% 91% / 0.1), 0 2px 4px -1px hsl(220 13% 91% / 0.06);
+    --shadow-elevated: 0 10px 15px -3px hsl(220 13% 91% / 0.1), 0 4px 6px -2px hsl(220 13% 91% / 0.05);
+
+    /* Sidebar Design */
+    --sidebar-background: 215 25% 15%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 184 91% 17%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 215 25% 25%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 215 25% 20%;
+    --sidebar-ring: 184 91% 35%;
+
+    /* Status Colors */
+    --status-online: 142 76% 36%;
+    --status-offline: 0 84% 60%;
+    --status-pending: 43 96% 56%;
+    --status-processing: 184 91% 35%;
+  }
+
+  .dark {
+    --background: 215 25% 6%;
+    --foreground: 0 0% 90%;
+
+    --card: 215 25% 10%;
+    --card-foreground: 0 0% 90%;
+    
+    --popover: 215 25% 10%;
+    --popover-foreground: 0 0% 90%;
+
+    --primary: 184 91% 35%;
+    --primary-foreground: 215 25% 6%;
+    --primary-glow: 184 91% 50%;
+    
+    --secondary: 142 76% 55%;
+    --secondary-foreground: 215 25% 6%;
+    --secondary-glow: 142 76% 70%;
+
+    --accent: 43 96% 70%;
+    --accent-foreground: 215 25% 6%;
+    --accent-glow: 43 96% 80%;
+
+    --muted: 215 25% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --destructive: 0 84% 70%;
+    --destructive-foreground: 215 25% 6%;
+    
+    --success: 142 76% 55%;
+    --success-foreground: 215 25% 6%;
+    
+    --warning: 43 96% 70%;
+    --warning-foreground: 215 25% 6%;
+
+    --border: 215 25% 20%;
+    --input: 215 25% 20%;
+    --ring: 184 91% 35%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(184 91% 35%), hsl(184 91% 50%));
+    --gradient-secondary: linear-gradient(135deg, hsl(142 76% 55%), hsl(142 76% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(184 91% 35%), hsl(142 76% 55%));
+    --gradient-subtle: linear-gradient(180deg, hsl(215 25% 10%), hsl(215 25% 6%));
+
+    --shadow-glow: 0 0 20px hsl(184 91% 50% / 0.4);
+    --shadow-card: 0 4px 6px -1px hsl(215 25% 0% / 0.3), 0 2px 4px -1px hsl(215 25% 0% / 0.2);
+    --shadow-elevated: 0 10px 15px -3px hsl(215 25% 0% / 0.3), 0 4px 6px -2px hsl(215 25% 0% / 0.2);
+
+    --sidebar-background: 215 25% 4%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 184 91% 35%;
+    --sidebar-primary-foreground: 215 25% 6%;
+    --sidebar-accent: 215 25% 15%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 215 25% 10%;
+    --sidebar-ring: 184 91% 50%;
+
+    --status-online: 142 76% 55%;
+    --status-offline: 0 84% 70%;
+    --status-pending: 43 96% 70%;
+    --status-processing: 184 91% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Custom utility classes for GrainChain */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .status-indicator {
+    @apply inline-flex items-center justify-center w-2 h-2 rounded-full;
+  }
+
+  .status-online {
+    @apply bg-success;
+  }
+
+  .status-offline {
+    @apply bg-destructive;
+  }
+
+  .status-pending {
+    @apply bg-warning;
+  }
+
+  .status-processing {
+    @apply bg-primary;
+  }
+}
