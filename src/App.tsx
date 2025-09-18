@@ -2,59 +2,94 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ThemeProvider } from "next-themes";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import Login from "./pages/Login";
+import DashboardLayout from "./components/layout/DashboardLayout";
 import NotFound from "./pages/NotFound";
 
 // Admin Pages
-import AdminUsers from "./pages/admin/Users";
-import AdminWallet from "./pages/admin/Wallet";
-import AdminQR from "./pages/admin/QR";
-import AdminAnalytics from "./pages/admin/Analytics";
-import AdminActivity from "./pages/admin/Activity";
-import AdminAccess from "./pages/admin/Access";
+import UserManagement from "./pages/admin/UserManagement";
+import WalletBlockchain from "./pages/admin/WalletBlockchain";
+import QRCodeGeneration from "./pages/admin/QRCodeGeneration";
+import PlatformAnalytics from "./pages/admin/PlatformAnalytics";
+import ActivityFeed from "./pages/admin/ActivityFeed";
 
-// Distribution Pages  
-import DistributionLog from "./pages/distribution/Log";
-import DistributionScanner from "./pages/distribution/Scanner";
-import DistributionInventory from "./pages/distribution/Inventory";
-import DistributionHistory from "./pages/distribution/History";
-import DistributionWallet from "./pages/distribution/Wallet";
-import DistributionPerformance from "./pages/distribution/Performance";
-
-import Layout from "./components/Layout";
+// Distribution Center Pages
+import NewDistribution from "./pages/distribution/NewDistribution";
+import QRScanner from "./pages/distribution/QRScanner";
+import InventoryBalance from "./pages/distribution/InventoryBalance";
+import TransactionHistory from "./pages/distribution/TransactionHistory";
+import PerformanceOverview from "./pages/distribution/PerformanceOverview";
 
 const queryClient = new QueryClient();
 
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated, isLoading } = useAuth();
+  
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+  
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+};
+
+const DashboardRedirect = () => {
+  const { user } = useAuth();
+  
+  if (!user) return <Navigate to="/login" replace />;
+  
+  const defaultPath = user.role === 'admin' ? '/dashboard/users' : '/dashboard/distribution';
+  return <Navigate to={defaultPath} replace />;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          
-          {/* Admin Routes */}
-          <Route path="/admin/users" element={<Layout userRole="admin"><AdminUsers /></Layout>} />
-          <Route path="/admin/wallet" element={<Layout userRole="admin"><AdminWallet /></Layout>} />
-          <Route path="/admin/qr" element={<Layout userRole="admin"><AdminQR /></Layout>} />
-          <Route path="/admin/analytics" element={<Layout userRole="admin"><AdminAnalytics /></Layout>} />
-          <Route path="/admin/activity" element={<Layout userRole="admin"><AdminActivity /></Layout>} />
-          <Route path="/admin/access" element={<Layout userRole="admin"><AdminAccess /></Layout>} />
-          
-          {/* Distribution Routes */}
-          <Route path="/distribution/log" element={<Layout userRole="distribution"><DistributionLog /></Layout>} />
-          <Route path="/distribution/scanner" element={<Layout userRole="distribution"><DistributionScanner /></Layout>} />
-          <Route path="/distribution/inventory" element={<Layout userRole="distribution"><DistributionInventory /></Layout>} />
-          <Route path="/distribution/history" element={<Layout userRole="distribution"><DistributionHistory /></Layout>} />
-          <Route path="/distribution/wallet" element={<Layout userRole="distribution"><DistributionWallet /></Layout>} />
-          <Route path="/distribution/performance" element={<Layout userRole="distribution"><DistributionPerformance /></Layout>} />
-          
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<DashboardRedirect />} />
+              
+              {/* Admin Routes */}
+              <Route path="users" element={<UserManagement />} />
+              <Route path="wallet" element={<WalletBlockchain />} />
+              <Route path="qr-codes" element={<QRCodeGeneration />} />
+              <Route path="analytics" element={<PlatformAnalytics />} />
+              <Route path="activity" element={<ActivityFeed />} />
+              
+              {/* Distribution Center Routes */}
+              <Route path="distribution" element={<NewDistribution />} />
+              <Route path="scanner" element={<QRScanner />} />
+              <Route path="inventory" element={<InventoryBalance />} />
+              <Route path="transactions" element={<TransactionHistory />} />
+              <Route path="performance" element={<PerformanceOverview />} />
+            </Route>
+            
+            <Route path="/" index element={<Navigate to="/dashboard" replace />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
+  </ThemeProvider>
   </QueryClientProvider>
 );
 
